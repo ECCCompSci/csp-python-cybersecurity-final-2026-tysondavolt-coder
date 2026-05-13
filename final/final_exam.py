@@ -2,8 +2,8 @@
 ╔══════════════════════════════════════════════════════════════╗
 ║        CSP Python & Cybersecurity Final Exam - 2026          ║
 ║                                                              ║
-║  Name:  _______________________________________________      ║
-║  Date:  _______________________________________________      ║
+║  Name:  _________tyson_________davolt_____________________________      ║
+║  Date:  ________________________5-11-2026_______________________      ║
 ╚══════════════════════════════════════════════════════════════╝
 
 GITHUB CLASSROOM INSTRUCTIONS:
@@ -75,7 +75,11 @@ print("\n--- Section 1: Python Basics ---")
 # Then print: "Hi, I'm [name], a grade [grade] student who loves [topic]!"
 
 # YOUR CODE HERE
+student_name = "tyson"
+student_grade = 10
+favorite_topic = "Python"
 
+print(f"Hi, I'm {student_name}, a grade {student_grade} student who loves {favorite_topic}!")
 
 # ── 1B. Grade Calculator [16 pts] ────────────────────────
 # Write a function called letter_grade(score) that takes a
@@ -83,7 +87,16 @@ print("\n--- Section 1: Python Basics ---")
 #   A = 90-100  |  B = 80-89  |  C = 70-79  |  D = 60-69  |  F = <60
 
 def letter_grade(score):
-    # YOUR CODE HERE
+    if score >= 90:
+        return "A"
+    elif score >= 80:
+        return "B"
+    elif score >= 70:
+        return "C"
+    elif score >= 60:
+        return "D"
+    else:
+        return "F"
     pass
 
 # Test your function (do not change these lines)
@@ -98,13 +111,14 @@ threats = ["phishing", "malware", "ransomware", "spyware", "DDoS"]
 
 # 1. Add "brute force" to the end of the list
 # YOUR CODE HERE
-
+threats.append("brute force")
 # 2. Print the total number of threats
 # YOUR CODE HERE
-
+print(len(threats))
 # 3. Print each threat in ALL CAPS using a loop
 # YOUR CODE HERE
-
+for threat in threats:
+    print(threat.upper())
 
 # ════════════════════════════════════════════════════════════
 # SECTION 2 — File I/O                              [40 pts]
@@ -121,7 +135,13 @@ print("\n--- Section 2: File I/O ---")
 #   Firewall: A system that monitors and controls network traffic.
 #   VPN: A tool that encrypts your internet connection.
 
-# YOUR CODE HERE
+with open("cyber_glossary.txt", "w") as file:
+    file.write("Malware: Software designed to harm a computer or steal data.\n")
+    file.write("Phishing: A fake message that tricks you into revealing information.\n")
+    file.write("Encryption: Scrambling data so only authorized people can read it.\n")
+    file.write("Firewall: A system that monitors and controls network traffic.\n")
+    file.write("VPN: A tool that encrypts your internet connection.\n")
+
 
 
 # ── 2B. Read and Search the File [20 pts] ────────────────
@@ -130,6 +150,17 @@ print("\n--- Section 2: File I/O ---")
 #   2. Search for the term "Encryption" and print that line
 
 # YOUR CODE HERE
+with open("cyber_glossary.txt", "r") as file:
+    lines = file.readlines()
+
+# 1. Print the total number of lines
+print("Total number of lines:", len(lines))
+
+# 2. Search for the term "Encryption" and print that line
+for line in lines:
+    if "Encryption" in line:
+        print("Line containing 'Encryption':")
+        print(line.strip())
 
 
 # ════════════════════════════════════════════════════════════
@@ -147,7 +178,21 @@ print("\n--- Section 3: Caesar Cipher ---")
 # Example: encrypt_message("Hello!", 4) -> "Lipps!"
 
 def encrypt_message(text, shift):
-    # YOUR CODE HERE
+    encrypted = ""
+
+    for char in text:
+        if char.isalpha():  # Check if character is a letter
+            # Handle uppercase letters
+            if char.isupper():
+                encrypted += chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+            # Handle lowercase letters
+            else:
+                encrypted += chr((ord(char) - ord('a') + shift) % 26 + ord('a'))
+        else:
+            # Leave spaces, numbers, and punctuation unchanged
+            encrypted += char
+
+    return encrypted
     pass
 
 
@@ -158,7 +203,7 @@ def encrypt_message(text, shift):
 # Example: decrypt_message("Lipps!", 4) -> "Hello!"
 
 def decrypt_message(text, shift):
-    # YOUR CODE HERE
+    return encrypt_message(text, -shift)
     pass
 
 
@@ -260,7 +305,20 @@ security_log = [
     "2026-04-23 07:18 - FAILED: bob wrong password from 192.168.1.11",
 ]
 
-# YOUR CODE HERE
+import os
+
+# Create folder structure
+os.makedirs("my_project/src", exist_ok=True)
+os.makedirs("my_project/docs", exist_ok=True)
+os.makedirs("my_project/data", exist_ok=True)
+
+# Write project_info.txt
+file_path = os.path.join("my_project", "project_info.txt")
+
+with open(file_path, "w") as f:
+    f.write("Project: CSP Final\n")
+    f.write("Author: Your Name\n")  # replace with your actual name
+    f.write("Date: April 2026\n")
 
 
 # ════════════════════════════════════════════════════════════
